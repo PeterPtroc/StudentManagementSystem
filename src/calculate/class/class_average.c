@@ -1,4 +1,3 @@
-// class_average.c
 #include <stdio.h>
 #include <string.h>
 #include "class_average.h"

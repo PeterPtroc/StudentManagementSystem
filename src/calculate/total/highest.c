@@ -1,4 +1,3 @@
-// highest.c
 #include <stdio.h>
 #include "highest.h"
 

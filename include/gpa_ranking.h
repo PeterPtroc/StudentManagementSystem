@@ -1,4 +1,3 @@
-// gpa_ranking.h
 #ifndef GPA_RANKING_H
 #define GPA_RANKING_H
 

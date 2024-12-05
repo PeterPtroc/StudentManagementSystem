@@ -1,4 +1,3 @@
-// class_lowest.h
 #ifndef CLASS_LOWEST_H
 #define CLASS_LOWEST_H
 

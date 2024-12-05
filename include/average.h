@@ -1,4 +1,3 @@
-// average.h
 #ifndef AVERAGE_H
 #define AVERAGE_H
 

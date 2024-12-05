@@ -1,4 +1,3 @@
-// average.c
 #include <stdio.h>
 #include "average.h"
 

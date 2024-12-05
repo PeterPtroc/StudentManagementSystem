@@ -1,4 +1,3 @@
-// lowest.h
 #ifndef LOWEST_H
 #define LOWEST_H
 

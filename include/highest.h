@@ -1,4 +1,3 @@
-// highest.h
 #ifndef HIGHEST_H
 #define HIGHEST_H
 

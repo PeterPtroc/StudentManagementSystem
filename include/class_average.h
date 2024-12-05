@@ -1,4 +1,3 @@
-// class_average.h
 #ifndef CLASS_AVERAGE_H
 #define CLASS_AVERAGE_H
 

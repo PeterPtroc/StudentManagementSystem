@@ -1,4 +1,3 @@
-// class_highest.h
 #ifndef CLASS_HIGHEST_H
 #define CLASS_HIGHEST_H
 

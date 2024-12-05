@@ -1,4 +1,3 @@
-// query.c
 #include <stdio.h>
 #include "query.h"
 

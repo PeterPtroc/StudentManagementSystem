@@ -1,4 +1,3 @@
-// class_lowest.c
 #include <stdio.h>
 #include <string.h>
 #include "class_lowest.h"

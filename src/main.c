@@ -1,4 +1,3 @@
-// main.c
 #include <stdio.h>
 #include <stdlib.h>
 #include "student.h"
@@ -14,6 +13,7 @@
 #include "class_highest.h"
 #include "class_lowest.h"
 #include "class_average.h"
+#include "data_io.h"
 
 #define MAX_STUDENTS 100
 
@@ -50,6 +50,8 @@ int main()
         printf("10. 班级最高分查询\n");
         printf("11. 班级最低分查询\n");
         printf("12. 班级平均分计算\n");
+        printf("13. 数据导入\n");
+        printf("14. 数据导出\n");
         printf("0. 退出\n");
         printf("请输入您的选择：");
         scanf("%d", &choice);
@@ -158,6 +160,18 @@ int main()
             printf("请输入课程序号（1-10）：");
             scanf("%d", &courseNumber);
             calculateClassAverageScore(students, count, className, (CourseNumber)courseNumber);
+            waitForKeyPress();
+            break;
+        }
+        case 13:
+        {
+            importData(students, &count, "data/export.ini");
+            waitForKeyPress();
+            break;
+        }
+        case 14:
+        {
+            exportData(students, count, "data/export.ini");
             waitForKeyPress();
             break;
         }

@@ -1,4 +1,3 @@
-// gpa.c
 #include <stdio.h>
 #include "gpa.h"
 

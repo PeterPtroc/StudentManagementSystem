@@ -1,4 +1,3 @@
-// class_highest.c
 #include <stdio.h>
 #include <string.h>
 #include "class_highest.h"

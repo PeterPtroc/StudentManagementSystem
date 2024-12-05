@@ -1,4 +1,3 @@
-// gpa_ranking.c
 #include <stdio.h>
 #include "gpa_ranking.h"
 #include "gpa.h"

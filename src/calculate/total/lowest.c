@@ -1,4 +1,3 @@
-// lowest.c
 #include <stdio.h>
 #include "lowest.h"
 
