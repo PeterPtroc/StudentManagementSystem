@@ -15,23 +15,27 @@
 #include "class_average.h"
 #include "data_io.h"
 
-#define MAX_STUDENTS 100
+#define INITIAL_CAPACITY 1000
 
 void waitForKeyPress()
 {
     printf("按任意键返回...\n");
     getchar(); // 吃掉上一次输入的换行符
-    getchar(); // 等待用户按任意键
+    getchar(); // 等待任意键
 }
 
 void clearScreen()
 {
-    printf("\033[2J\033[H");
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 }
 
 int main()
 {
-    Student students[MAX_STUDENTS];
+    Student *students = NULL;
     int count = 0;
     int choice;
     do
@@ -164,17 +168,13 @@ int main()
             break;
         }
         case 13:
-        {
-            importData(students, &count, "data/export.ini");
+            importData(&students, &count, "data/export.ini");
             waitForKeyPress();
             break;
-        }
         case 14:
-        {
             exportData(students, count, "data/export.ini");
             waitForKeyPress();
             break;
-        }
         case 0:
             printf("退出系统。\n");
             break;
@@ -183,5 +183,9 @@ int main()
             waitForKeyPress();
         }
     } while (choice != 0);
+
+    // 释放动态分配的内存
+    free(students);
+
     return 0;
 }

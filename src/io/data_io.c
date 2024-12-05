@@ -4,7 +4,9 @@
 #include <sys/types.h>
 #include "data_io.h"
 
-void importData(Student students[], int *count, const char *filename)
+#define INITIAL_CAPACITY 100
+
+void importData(Student **students, int *count, const char *filename)
 {
     FILE *file = fopen(filename, "r");
     if (!file)
@@ -13,21 +15,43 @@ void importData(Student students[], int *count, const char *filename)
         return;
     }
 
+    int capacity = INITIAL_CAPACITY;
+    *students = (Student *)malloc(capacity * sizeof(Student));
+    if (*students == NULL)
+    {
+        perror("内存分配失败");
+        fclose(file);
+        return;
+    }
+
     *count = 0;
-    while (fscanf(file, "%d %s %s", &students[*count].num, students[*count].name, students[*count].class) != EOF)
+    while (fscanf(file, "%d %s %s", &(*students)[*count].num, (*students)[*count].name, (*students)[*count].class) != EOF)
     {
         for (int i = 0; i < COURSE_NUM; i++)
         {
-            fscanf(file, "%d %f", &students[*count].score[i], &students[*count].credit[i]);
+            fscanf(file, "%d %f", &(*students)[*count].score[i], &(*students)[*count].credit[i]);
         }
         (*count)++;
+
+        // 如果超过当前容量，重新分配内存
+        if (*count >= capacity)
+        {
+            capacity *= 2;
+            *students = (Student *)realloc(*students, capacity * sizeof(Student));
+            if (*students == NULL)
+            {
+                perror("内存重新分配失败");
+                fclose(file);
+                return;
+            }
+        }
     }
 
     fclose(file);
     printf("数据导入成功，共导入 %d 名学生的信息。\n", *count);
 }
 
-void exportData(Student students[], int count, const char *filename)
+void exportData(Student *students, int count, const char *filename)
 {
     // 检查并创建 data 目录
     struct stat st = {0};
