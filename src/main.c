@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "student.h"
 #include "input.h"
 #include "query.h"
@@ -82,10 +83,9 @@ int main()
             break;
         case '4':
         {
-            int courseIndex;
-            printf("请输入课程序号（1-10）：");
-            scanf("%d", &courseIndex);
-            statisticsByCourse(students, count, courseIndex - 1);
+            int courseNumber;
+            inputCourseNumber(&courseNumber);
+            statisticsByCourse(students, count, (CourseNumber)courseNumber);
             waitForKeyPress();
             break;
         }
@@ -93,7 +93,8 @@ int main()
         {
             int num;
             printf("请输入要计算绩点的学生学号：");
-            scanf("%d", &num);
+            inputStudentNumber(&num);
+            
             for (int i = 0; i < count; i++)
             {
                 if (students[i].num == num)
@@ -113,8 +114,8 @@ int main()
         case '7':
         {
             int courseNumber;
-            printf("请输入课程序号（1-10）：");
-            scanf("%d", &courseNumber);
+            inputCourseNumber(&courseNumber);
+            
             findHighestScore(students, count, (CourseNumber)courseNumber);
             waitForKeyPress();
             break;
@@ -122,8 +123,7 @@ int main()
         case '8':
         {
             int courseNumber;
-            printf("请输入课程序号（1-10）：");
-            scanf("%d", &courseNumber);
+            inputCourseNumber(&courseNumber);
             findLowestScore(students, count, (CourseNumber)courseNumber);
             waitForKeyPress();
             break;
@@ -131,8 +131,8 @@ int main()
         case '9':
         {
             int courseNumber;
-            printf("请输入课程序号（1-10）：");
-            scanf("%d", &courseNumber);
+            inputCourseNumber(&courseNumber);
+
             calculateAverageScore(students, count, (CourseNumber)courseNumber);
             waitForKeyPress();
             break;
@@ -142,10 +142,11 @@ int main()
         {
             char className[20];
             int courseNumber;
-            printf("请输入班级：");
-            scanf("%s", className);
-            printf("请输入课程序号（1-10）：");
-            scanf("%d", &courseNumber);
+            
+            inputClass(className, sizeof(className));
+            inputCourseNumber(&courseNumber);
+
+
             findClassHighestScore(students, count, className, (CourseNumber)courseNumber);
             waitForKeyPress();
             break;
@@ -155,10 +156,11 @@ int main()
         {
             char className[20];
             int courseNumber;
-            printf("请输入班级：");
-            scanf("%s", className);
-            printf("请输入课程序号（1-10）：");
-            scanf("%d", &courseNumber);
+            
+            inputClass(className, sizeof(className));
+            inputCourseNumber(&courseNumber);
+
+
             findClassLowestScore(students, count, className, (CourseNumber)courseNumber);
             waitForKeyPress();
             break;
@@ -168,10 +170,10 @@ int main()
         {
             char className[20];
             int courseNumber;
-            printf("请输入班级：");
-            scanf("%s", className);
-            printf("请输入课程序号（1-10）：");
-            scanf("%d", &courseNumber);
+
+            inputClass(className, sizeof(className));
+            inputCourseNumber(&courseNumber);
+
             calculateClassAverageScore(students, count, className, (CourseNumber)courseNumber);
             waitForKeyPress();
             break;

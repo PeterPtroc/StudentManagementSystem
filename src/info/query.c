@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include "query.h"
+#include "input.h"
 
 void queryStudent(Student students[], int count)
 {
     int num;
-    printf("请输入要查询的学生学号：");
-    scanf("%d", &num);
+    inputStudentNumber(&num);
     for (int i = 0; i < count; i++)
     {
         if (students[i].num == num)
