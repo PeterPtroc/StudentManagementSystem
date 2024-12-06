@@ -53,13 +53,15 @@ void importData(Student **students, int *count, const char *filename)
 
 void exportData(Student *students, int count, const char *filename)
 {
-    // 检查并创建 data 目录
-    struct stat st = {0};
-    if (stat("data", &st) == -1)
+    struct stat buffer;
+    if (stat(filename, &buffer) == 0)
     {
-        if (mkdir("data", 0700) == -1)
+        char choice;
+        printf("文件 %s 已存在。是否覆盖？(y/n): ", filename);
+        scanf(" %c", &choice);
+        if (choice != 'y' && choice != 'Y')
         {
-            perror("无法创建 data 目录");
+            printf("已取消导出。\n");
             return;
         }
     }

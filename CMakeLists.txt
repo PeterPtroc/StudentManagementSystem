@@ -5,15 +5,14 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # 头文件目录
-include_directories(include)
+include_directories(include/calculate)
+include_directories(include/calculate/class)
+include_directories(include/calculate/total)
+include_directories(include/info)
+include_directories(include/utils)
+include_directories(include/io)
+include_directories(include/config) 
 
-# 包含所有源码子目录
-file(GLOB_RECURSE HEADER_DIRS RELATIVE ${CMAKE_SOURCE_DIR} "include/*")
-foreach(HEADER_DIR ${HEADER_DIRS})
-    if(IS_DIRECTORY ${CMAKE_SOURCE_DIR}/${HEADER_DIR})
-        include_directories(${CMAKE_SOURCE_DIR}/${HEADER_DIR})
-    endif()
-endforeach()
 
 # 查找所有源文件
 file(GLOB_RECURSE SOURCES "src/*.c")

@@ -94,7 +94,6 @@ int main()
         case '5':
         {
             int num;
-            printf("请输入要计算绩点的学生学号：");
             inputStudentNumber(&num);
 
             for (int i = 0; i < count; i++)
@@ -104,6 +103,10 @@ int main()
                     calculateGPA(&students[i]);
                     printf("学生 %s 的 GPA 为 %.2f\n", students[i].name, students[i].gpa);
                     break;
+                }
+                else if (i == count - 1)
+                {
+                    printf("未找到学号为 %d 的学生。\n", num);
                 }
             }
             waitForKeyPress();
