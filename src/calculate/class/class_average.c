@@ -21,6 +21,6 @@ void calculateClassAverageScore(Student students[], int count, const char *class
     }
     else
     {
-        printf("未找到班级%s的学生。\n", className);
+        printf("班级%s还未添加学生！\n", className);
     }
 }

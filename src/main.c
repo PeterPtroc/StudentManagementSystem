@@ -37,7 +37,12 @@ void clearScreen()
 
 int main()
 {
-    Student *students = NULL;
+    Student *students = (Student *)malloc(INITIAL_CAPACITY * sizeof(Student));
+    if (students == NULL)
+    {
+        fprintf(stderr, "内存分配失败\n");
+        return 1;
+    }
     int count = 0;
     char choice;
     do

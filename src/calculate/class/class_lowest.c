@@ -15,6 +15,11 @@ void findClassLowestScore(Student students[], int count, const char *className, 
             }
         }
     }
+    if (minScore == 101)
+    {
+        printf("班级%s还没有添加学生！\n", className);
+        return;
+    }
     printf("班级%s，课程%d的最低分是%d，学生有：\n", className, courseNumber, minScore);
     for (int i = 0; i < count; i++)
     {

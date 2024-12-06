@@ -4,7 +4,8 @@
 void clean_stdin(void)
 {
     int c;
-    do {
+    do
+    {
         c = getchar();
     } while (c != '\n' && c != EOF);
 }
