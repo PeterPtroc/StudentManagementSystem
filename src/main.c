@@ -14,14 +14,14 @@
 #include "class_lowest.h"
 #include "class_average.h"
 #include "data_io.h"
+#include "utils.h"
 
 #define INITIAL_CAPACITY 1000
 
 void waitForKeyPress()
 {
     printf("按任意键返回...\n");
-    while (getchar() != '\n')
-        ;
+    clean_stdin();
     getchar(); // 等待任意键
 }
 
@@ -62,9 +62,8 @@ int main()
 
         // 读取用户输入
         choice = getchar();
-        // // 清除缓冲区（fflush 无法在linux下使用）
-        // while (getchar() != '\n')
-        //     ;
+        
+        clean_stdin();
 
         switch (choice)
         {
@@ -138,6 +137,7 @@ int main()
             waitForKeyPress();
             break;
         }
+        case 'a':
         case 'A':
         {
             char className[20];
@@ -150,6 +150,7 @@ int main()
             waitForKeyPress();
             break;
         }
+        case 'b':
         case 'B':
         {
             char className[20];
@@ -162,6 +163,7 @@ int main()
             waitForKeyPress();
             break;
         }
+        case 'c':
         case 'C':
         {
             char className[20];
@@ -174,10 +176,12 @@ int main()
             waitForKeyPress();
             break;
         }
+        case 'd':
         case 'D':
             importData(&students, &count, "data/export.ini");
             waitForKeyPress();
             break;
+        case 'e':
         case 'E':
             exportData(students, count, "data/export.ini");
             waitForKeyPress();
