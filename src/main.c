@@ -20,7 +20,8 @@
 void waitForKeyPress()
 {
     printf("按任意键返回...\n");
-    getchar(); // 吃掉上一次输入的换行符
+    while (getchar() != '\n')
+        ;
     getchar(); // 等待任意键
 }
 
@@ -37,7 +38,7 @@ int main()
 {
     Student *students = NULL;
     int count = 0;
-    int choice;
+    char choice;
     do
     {
         clearScreen();
@@ -51,30 +52,36 @@ int main()
         printf("7. 最高分查询\n");
         printf("8. 最低分查询\n");
         printf("9. 平均分计算\n");
-        printf("10. 班级最高分查询\n");
-        printf("11. 班级最低分查询\n");
-        printf("12. 班级平均分计算\n");
-        printf("13. 数据导入\n");
-        printf("14. 数据导出\n");
+        printf("A. 班级最高分查询\n");
+        printf("B. 班级最低分查询\n");
+        printf("C. 班级平均分计算\n");
+        printf("D. 数据导入\n");
+        printf("E. 数据导出\n");
         printf("0. 退出\n");
         printf("请输入您的选择：");
-        scanf("%d", &choice);
+
+        // 读取用户输入
+        choice = getchar();
+        // // 清除缓冲区（fflush 无法在linux下使用）
+        // while (getchar() != '\n')
+        //     ;
+
         switch (choice)
         {
-        case 1:
+        case '1':
             inputStudent(&students[count]);
             count++;
             waitForKeyPress();
             break;
-        case 2:
+        case '2':
             queryStudent(students, count);
             waitForKeyPress();
             break;
-        case 3:
+        case '3':
             sortStudentsByTotalScore(students, count);
             waitForKeyPress();
             break;
-        case 4:
+        case '4':
         {
             int courseIndex;
             printf("请输入课程序号（1-10）：");
@@ -83,7 +90,7 @@ int main()
             waitForKeyPress();
             break;
         }
-        case 5:
+        case '5':
         {
             int num;
             printf("请输入要计算绩点的学生学号：");
@@ -100,11 +107,11 @@ int main()
             waitForKeyPress();
             break;
         }
-        case 6:
+        case '6':
             sortStudentsByGPA(students, count);
             waitForKeyPress();
             break;
-        case 7:
+        case '7':
         {
             int courseNumber;
             printf("请输入课程序号（1-10）：");
@@ -113,7 +120,7 @@ int main()
             waitForKeyPress();
             break;
         }
-        case 8:
+        case '8':
         {
             int courseNumber;
             printf("请输入课程序号（1-10）：");
@@ -122,7 +129,7 @@ int main()
             waitForKeyPress();
             break;
         }
-        case 9:
+        case '9':
         {
             int courseNumber;
             printf("请输入课程序号（1-10）：");
@@ -131,7 +138,7 @@ int main()
             waitForKeyPress();
             break;
         }
-        case 10:
+        case 'A':
         {
             char className[20];
             int courseNumber;
@@ -143,7 +150,7 @@ int main()
             waitForKeyPress();
             break;
         }
-        case 11:
+        case 'B':
         {
             char className[20];
             int courseNumber;
@@ -155,7 +162,7 @@ int main()
             waitForKeyPress();
             break;
         }
-        case 12:
+        case 'C':
         {
             char className[20];
             int courseNumber;
@@ -167,22 +174,22 @@ int main()
             waitForKeyPress();
             break;
         }
-        case 13:
+        case 'D':
             importData(&students, &count, "data/export.ini");
             waitForKeyPress();
             break;
-        case 14:
+        case 'E':
             exportData(students, count, "data/export.ini");
             waitForKeyPress();
             break;
-        case 0:
+        case '0':
             printf("退出系统。\n");
             break;
         default:
             printf("无效的选择。\n");
             waitForKeyPress();
         }
-    } while (choice != 0);
+    } while (choice != '0');
 
     // 释放动态分配的内存
     free(students);
