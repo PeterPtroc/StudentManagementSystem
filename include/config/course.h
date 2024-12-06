@@ -3,16 +3,16 @@
 
 typedef enum
 {
-    COURSE1 = 1,
-    COURSE2,
-    COURSE3,
-    COURSE4,
-    COURSE5,
-    COURSE6,
-    COURSE7,
-    COURSE8,
-    COURSE9,
-    COURSE10
+    MATH = 1,
+    ENGLISH,
+    CHINESE,
+    PHYSICS,
+    CHEMISTRY,
+    BIOLOGY,
+    POLITICAL_EDUCATION,
+    HEALTH,
+    PROGRAMMING,
+    HISTORY
 } CourseNumber;
 
 #endif

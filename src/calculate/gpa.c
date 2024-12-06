@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "gpa.h"
+#include "input.h"
 
 void calculateGPA(Student *stu)
 {
@@ -18,4 +19,24 @@ void calculateGPA(Student *stu)
         totalCredits += stu->credit[i];
     }
     stu->gpa = totalPoints / totalCredits;
+}
+
+void findAndPrintGPA(Student *students, int count)
+{
+    int num;
+    inputStudentNumber(&num);
+
+    for (int i = 0; i < count; i++)
+    {
+        if (students[i].num == num)
+        {
+            calculateGPA(&students[i]);
+            printf("学生 %s 的 GPA 为 %.2f\n", students[i].name, students[i].gpa);
+            break;
+        }
+        else if (i == count - 1)
+        {
+            printf("未找到学号为 %d 的学生。\n", num);
+        }
+    }
 }

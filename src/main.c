@@ -16,6 +16,7 @@
 #include "class_average.h"
 #include "data_io.h"
 #include "utils.h"
+#include "gpa.h"
 
 #define INITIAL_CAPACITY 1000
 
@@ -98,22 +99,7 @@ int main()
         }
         case '5':
         {
-            int num;
-            inputStudentNumber(&num);
-
-            for (int i = 0; i < count; i++)
-            {
-                if (students[i].num == num)
-                {
-                    calculateGPA(&students[i]);
-                    printf("学生 %s 的 GPA 为 %.2f\n", students[i].name, students[i].gpa);
-                    break;
-                }
-                else if (i == count - 1)
-                {
-                    printf("未找到学号为 %d 的学生。\n", num);
-                }
-            }
+            findAndPrintGPA(students, count);
             waitForKeyPress();
             break;
         }
@@ -134,6 +120,7 @@ int main()
         {
             int courseNumber;
             inputCourseNumber(&courseNumber);
+
             findLowestScore(students, count, (CourseNumber)courseNumber);
             waitForKeyPress();
             break;
