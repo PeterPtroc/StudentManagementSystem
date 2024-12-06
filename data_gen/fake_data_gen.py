@@ -4,10 +4,15 @@ import random
 fake = Faker('zh_CN')
 
 data_size = 500
+generated_nums = set()
 
 def generate_student_data():
     # 学号
-    num = '2024' + str(random.randint(1000, 9999))
+    while True:
+        num = '2024' + str(random.randint(1000, 9999))
+        if num not in generated_nums:
+            generated_nums.add(num)
+            break
     
     # 姓名
     name = fake.name()

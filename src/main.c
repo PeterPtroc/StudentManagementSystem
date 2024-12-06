@@ -44,26 +44,28 @@ int main()
     {
         clearScreen();
         printf("\n学生成绩管理系统\n");
-        printf("1. 成绩录入\n");
-        printf("2. 成绩查询\n");
-        printf("3. 成绩排序\n");
-        printf("4. 成绩统计\n");
-        printf("5. 绩点计算\n");
-        printf("6. 绩点排名\n");
-        printf("7. 最高分查询\n");
-        printf("8. 最低分查询\n");
-        printf("9. 平均分计算\n");
-        printf("A. 班级最高分查询\n");
-        printf("B. 班级最低分查询\n");
-        printf("C. 班级平均分计算\n");
-        printf("D. 数据导入\n");
-        printf("E. 数据导出\n");
-        printf("0. 退出\n");
+        printf("*********************************\n");
+        printf("*\t1. 成绩录入\t\t*\n");
+        printf("*\t2. 成绩查询\t\t*\n");
+        printf("*\t3. 成绩排序\t\t*\n");
+        printf("*\t4. 成绩统计\t\t*\n");
+        printf("*\t5. 绩点计算\t\t*\n");
+        printf("*\t6. 绩点排名\t\t*\n");
+        printf("*\t7. 最高分查询\t\t*\n");
+        printf("*\t8. 最低分查询\t\t*\n");
+        printf("*\t9. 平均分计算\t\t*\n");
+        printf("*\tA. 班级最高分查询\t*\n");
+        printf("*\tB. 班级最低分查询\t*\n");
+        printf("*\tC. 班级平均分计算\t*\n");
+        printf("*\tD. 数据导入\t\t*\n");
+        printf("*\tE. 数据导出\t\t*\n");
+        printf("*\t0. 退出\t\t\t*\n");
+        printf("*********************************\n");
         printf("请输入您的选择：");
 
         // 读取用户输入
         choice = getchar();
-        
+
         clean_stdin();
 
         switch (choice)
@@ -94,7 +96,7 @@ int main()
             int num;
             printf("请输入要计算绩点的学生学号：");
             inputStudentNumber(&num);
-            
+
             for (int i = 0; i < count; i++)
             {
                 if (students[i].num == num)
@@ -115,7 +117,7 @@ int main()
         {
             int courseNumber;
             inputCourseNumber(&courseNumber);
-            
+
             findHighestScore(students, count, (CourseNumber)courseNumber);
             waitForKeyPress();
             break;
@@ -142,10 +144,9 @@ int main()
         {
             char className[20];
             int courseNumber;
-            
+
             inputClass(className, sizeof(className));
             inputCourseNumber(&courseNumber);
-
 
             findClassHighestScore(students, count, className, (CourseNumber)courseNumber);
             waitForKeyPress();
@@ -156,10 +157,9 @@ int main()
         {
             char className[20];
             int courseNumber;
-            
+
             inputClass(className, sizeof(className));
             inputCourseNumber(&courseNumber);
-
 
             findClassLowestScore(students, count, className, (CourseNumber)courseNumber);
             waitForKeyPress();
