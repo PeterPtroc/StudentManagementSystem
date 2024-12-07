@@ -24,7 +24,7 @@ void sortStudentsByTotalScore(Student students[], int count)
     // 输出排序结果
     for (int i = 0; i < count; i++)
     {
-        printf("学号：%d，姓名：%s，总成绩：", students[i].num, students[i].name);
+        printf("名次：%d，学号：%d，姓名：%s，总成绩：", i+1, students[i].num, students[i].name);
         int total = 0;
         for (int j = 0; j < COURSE_NUM; j++)
         {
