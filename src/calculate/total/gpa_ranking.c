@@ -24,7 +24,6 @@ void sortStudentsByGPA(Student students[], int count)
         }
     }
 
-    // 输出排序结果
     printf("绩点排名如下：\n");
     for (int i = 0; i < count; i++)
     {

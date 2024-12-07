@@ -24,7 +24,7 @@ void waitForKeyPress()
 {
     printf("按任意键返回...\n");
     clean_stdin();
-    getchar(); // 等待任意键
+    // getchar(); // 等待任意键
 }
 
 void clearScreen()

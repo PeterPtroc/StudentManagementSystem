@@ -3,6 +3,11 @@
 
 void calculateAverageScore(Student students[], int count, int courseNumber)
 {
+    if(count == 0)
+    {
+        printf("请先添加学生！\n");
+        return;
+    }
     int totalScore = 0;
     for (int i = 0; i < count; i++)
     {

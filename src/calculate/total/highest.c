@@ -3,6 +3,11 @@
 
 void findHighestScore(Student students[], int count, CourseNumber course)
 {
+    if (count == 0)
+    {
+        printf("请先添加学生！\n");
+        return;
+    }
     int maxScore = -1;
     for (int i = 0; i < count; i++)
     {

@@ -3,6 +3,11 @@
 
 void findLowestScore(Student students[], int count, int courseNumber)
 {
+    if (count == 0)
+    {
+        printf("请先添加学生！\n");
+        return;
+    }
     int minScore = 101;
     for (int i = 0; i < count; i++)
     {
