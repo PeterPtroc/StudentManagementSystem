@@ -44,6 +44,12 @@ void statisticsByCourse(Student students[], int count, int courseIndex)
             p = p->next;
         }
     }
+    // 最后输出总结
+    for (int i = 0; i < 5; i++)
+    {
+        printf("分数段%s，共有%d人：\n", labels[i], counts[i]);
+    }
+
     // 释放链表
     for (int i = 0; i < 5; i++)
     {
