@@ -2,6 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include "input.h"
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 #define BUFFER_SIZE 100
 
@@ -103,6 +106,12 @@ void inputCourseNumber(int *num)
 
 void inputName(char *name, size_t size)
 {
+#ifdef _WIN32
+    // 设置控制台输入和输出编码为 UTF-8
+    SetConsoleCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
     do
     {
         printf("\033[1;33m请输入姓名：\033[1;0m");
@@ -201,4 +210,5 @@ void inputStudent(Student *stu)
         inputScore(&stu->score[i]);
         inputCredit(&stu->credit[i]);
     }
+    puts("\033[1;32m录入成功！\033[1;0m\n");
 }
