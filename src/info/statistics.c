@@ -14,7 +14,7 @@ void statisticsByCourse(Student students[], int count, int courseIndex)
     int counts[5] = {0};
     for (int i = 0; i < count; i++)
     {
-        int score = students[i].score[courseIndex];
+        int score = students[i].score[courseIndex - 1];
         int index;
         if (score >= 90)
             index = 0;
