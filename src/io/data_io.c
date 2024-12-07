@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#ifdef _WIN32
+#include <direct.h>
+#define mkdir _mkdir
+#endif
 #include "data_io.h"
 
 #define INITIAL_CAPACITY 100
@@ -64,6 +68,16 @@ void exportData(Student *students, int count, const char *filename)
             printf("\033[1;36m已取消导出。\033[1;0m\n");
             return;
         }
+    }
+
+    // 检查并创建data文件夹
+    if (stat("data", &buffer) == -1)
+    {
+#ifdef _WIN32
+        mkdir("data");
+#else
+        mkdir("data", 0700);
+#endif
     }
 
     FILE *file = fopen(filename, "w");

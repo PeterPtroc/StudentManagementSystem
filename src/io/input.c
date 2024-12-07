@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <regex.h>
 #include "input.h"
 
 #define BUFFER_SIZE 100
@@ -23,24 +22,34 @@ int validateName(const char *name)
     return 1;
 }
 
+// 为了windows的兼容性放弃使用regex.h库，改为直接逻辑实现
 int validateClass(const char *class)
 {
-    regex_t regex;
-    int reti;
-
-    // Compile regular expression
-    reti = regcomp(&regex, "^240[1-9]|241[0-5]$", REG_EXTENDED);
-    if (reti)
-    {
-        fprintf(stderr, "\033[1;31mCould not compile regex\033[1;0m\n");
+    // 检查长度是否为4
+    if (strlen(class) != 4)
         return 0;
+
+    // 检查前3位是否为"240"或"241"
+    if (strncmp(class, "240", 3) == 0)
+    {
+        char c = class[3];
+        // 第4位是否在'1'到'9'之间
+        if (c >= '1' && c <= '9')
+            return 1;
+        else
+            return 0;
     }
-
-    // Execute regular expression
-    reti = regexec(&regex, class, 0, NULL, 0);
-    regfree(&regex);
-
-    return !reti;
+    else if (strncmp(class, "241", 3) == 0)
+    {
+        char c = class[3];
+        // 第4位是否在'0'到'5'之间
+        if (c >= '0' && c <= '5')
+            return 1;
+        else
+            return 0;
+    }
+    else
+        return 0;
 }
 
 int validateScore(int score)
@@ -97,13 +106,23 @@ void inputName(char *name, size_t size)
     do
     {
         printf("\033[1;33m请输入姓名：\033[1;0m");
-        if (fgets(name, size, stdin) == NULL || !validateName(name))
+        if (fgets(name, size, stdin) == NULL)
+        {
+            fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的姓名。\033[1;0m\n");
+            continue;
+        }
+        // 移除额外读入的换行符
+#ifdef _WIN32
+        name[strcspn(name, "\r\n")] = '\0';
+#else
+        name[strcspn(name, "\n")] = '\0';
+#endif
+        if (!validateName(name))
         {
             fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的姓名。\033[1;0m\n");
         }
         else
         {
-            name[strcspn(name, "\n")] = '\0'; // 移除额外读入的换行符
             break;
         }
     } while (1);
@@ -114,13 +133,23 @@ void inputClass(char *class, size_t size)
     do
     {
         printf("\033[1;33m请输入班级：\033[1;0m");
-        if (fgets(class, size, stdin) == NULL || !validateClass(class))
+        if (fgets(class, size, stdin) == NULL)
+        {
+            fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的班级。\033[1;0m\n");
+            continue;
+        }
+        // 移除额外读入的换行符
+#ifdef _WIN32
+        class[strcspn(class, "\r\n")] = '\0';
+#else
+        class[strcspn(class, "\n")] = '\0';
+#endif
+        if (!validateClass(class))
         {
             fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的班级。\033[1;0m\n");
         }
         else
         {
-            class[strcspn(class, "\n")] = '\0'; // 移除额外读入的换行符
             break;
         }
     } while (1);

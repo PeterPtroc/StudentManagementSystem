@@ -17,6 +17,11 @@
 #include "data_io.h"
 #include "utils.h"
 #include "gpa.h"
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
 
 #define INITIAL_CAPACITY 10
 
@@ -38,6 +43,11 @@ void clearScreen()
 
 int main()
 {
+#ifdef _WIN32
+    // 在win平台下设置控制台输出编码为UTF-8
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
     Student *students = (Student *)malloc(INITIAL_CAPACITY * sizeof(Student));
     if (students == NULL)
     {
@@ -185,6 +195,11 @@ int main()
             break;
         case '0':
             printf("\033[1;31m正在退出系统\033[1;0m\n");
+#ifdef _WIN32
+            Sleep(2000);
+#else
+            sleep(2);
+#endif
             break;
         default:
             printf("\033[1;31m无效的选择。\033[1;0m\n");

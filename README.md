@@ -2,6 +2,16 @@
 
 ## 使用方式
 
+在 cmakelists 文件里增加了编译选项
+
+option(USE_MINGW "Use x86_64-w64-mingw32-g++ compiler" OFF)
+
+默认为 OFF，即使用 gcc 编译器编译 linux 下文件
+
+如果改为 ON，则使用 x86_64-w64-mingw32-gcc 编译器编译 win 下文件（当然编译器可以自己改）
+
+请先确认目标平台再执行以下步骤
+
 ```bash
 mkdir build
 
