@@ -19,6 +19,7 @@
 #include "gpa.h"
 #ifdef _WIN32
 #include <windows.h>
+#include "resource.h"
 #else
 #include <unistd.h>
 #endif

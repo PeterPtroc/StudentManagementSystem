@@ -1,6 +1,6 @@
 # 学生信息管理系统
 
-## 使用方式
+## 编译方式
 
 在 cmakelists 文件里增加了编译选项
 
@@ -10,7 +10,11 @@ option(USE_MINGW "Use x86_64-w64-mingw32-g++ compiler" OFF)
 
 如果改为 ON，则使用 x86_64-w64-mingw32-gcc 编译器编译 win 下文件（当然编译器可以自己改）
 
+为 win 下 exe 提供了图标支持，图标存储在 src/icon/icon.ico
+
 请先确认目标平台再执行以下步骤
+
+此为 linux 下的：
 
 ```bash
 mkdir build
@@ -22,6 +26,20 @@ cmake ..
 make
 
 ./StudentManagementSystem
+```
+
+此为要编译到 windows 平台的：
+
+```bash
+mkdir build
+
+cd build
+
+cmake -DUSE_MINGW=ON -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ -DCMAKE_RC_COMPILER=x86_64-w64-mingw32-windres ..
+
+make
+
+./StudentManagementSystem.exe
 ```
 
 ## 提供了 datagen 来生成假数据
