@@ -24,9 +24,9 @@ void sortStudentsByGPA(Student students[], int count)
         }
     }
 
-    printf("绩点排名如下：\n");
+    printf("\033[1;36m绩点排名如下：\033[1;0m\n");
     for (int i = 0; i < count; i++)
     {
-        printf("名次：%d，学号：%d，姓名：%s，绩点：%.2f\n", i + 1, students[i].num, students[i].name, students[i].gpa);
+        printf("\033[1;36m名次：%d，学号：%d，姓名：%s，绩点：%.2f\033[1;0m\n", i + 1, students[i].num, students[i].name, students[i].gpa);
     }
 }

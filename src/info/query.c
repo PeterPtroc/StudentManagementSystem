@@ -10,13 +10,13 @@ void queryStudent(Student students[], int count)
     {
         if (students[i].num == num)
         {
-            printf("姓名：%s\n", students[i].name);
+            printf("\033[1;36m姓名：%s\033[1;0m\n", students[i].name);
             for (int j = 0; j < COURSE_NUM; j++)
             {
-                printf("课程%d成绩：%d\n", j + 1, students[i].score[j]);
+                printf("\033[1;36m课程%d成绩：%d\033[1;0m\n", j + 1, students[i].score[j]);
             }
             return;
         }
     }
-    printf("未找到该学生。\n");
+    printf("\033[1;31m未找到该学生。\033[1;0m\n");
 }

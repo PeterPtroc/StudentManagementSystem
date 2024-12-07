@@ -23,6 +23,12 @@ void calculateGPA(Student *stu)
 
 void findAndPrintGPA(Student *students, int count)
 {
+    if (count == 0)
+    {
+        printf("\033[1;31m请先添加学生！\033[1;0m\n");
+        return;
+    }
+
     int num;
     inputStudentNumber(&num);
 
@@ -31,12 +37,12 @@ void findAndPrintGPA(Student *students, int count)
         if (students[i].num == num)
         {
             calculateGPA(&students[i]);
-            printf("学生 %s 的 GPA 为 %.2f\n", students[i].name, students[i].gpa);
+            printf("\033[1;36m学生 %s 的 GPA 为 %.2f\033[1;0m\n", students[i].name, students[i].gpa);
             break;
         }
         else if (i == count - 1)
         {
-            printf("未找到学号为 %d 的学生。\n", num);
+            printf("\033[1;31m未找到学号为 %d 的学生。\033[1;0m\n", num);
         }
     }
 }

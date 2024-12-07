@@ -11,7 +11,7 @@ void importData(Student **students, int *count, const char *filename)
     FILE *file = fopen(filename, "r");
     if (!file)
     {
-        perror("无法打开文件进行读取");
+        perror("\033[1;31m无法打开文件进行读取\033[1;0m");
         return;
     }
 
@@ -19,7 +19,7 @@ void importData(Student **students, int *count, const char *filename)
     *students = (Student *)malloc(capacity * sizeof(Student));
     if (*students == NULL)
     {
-        perror("内存分配失败");
+        perror("\033[1;31m内存分配失败\033[1;0m");
         fclose(file);
         return;
     }
@@ -40,7 +40,7 @@ void importData(Student **students, int *count, const char *filename)
             *students = (Student *)realloc(*students, capacity * sizeof(Student));
             if (*students == NULL)
             {
-                perror("内存重新分配失败");
+                perror("\033[1;31m内存重新分配失败\033[1;0m");
                 fclose(file);
                 return;
             }
@@ -48,7 +48,7 @@ void importData(Student **students, int *count, const char *filename)
     }
 
     fclose(file);
-    printf("数据导入成功，共导入 %d 名学生的信息。\n", *count);
+    printf("\033[1;36m数据导入成功，共导入 %d 名学生的信息。\033[1;0m\n", *count);
 }
 
 void exportData(Student *students, int count, const char *filename)
@@ -57,11 +57,11 @@ void exportData(Student *students, int count, const char *filename)
     if (stat(filename, &buffer) == 0)
     {
         char choice;
-        printf("文件 %s 已存在。是否覆盖？(y/n): ", filename);
+        printf("\033[1;31m文件 %s 已存在。是否覆盖？(y/n): \033[1;0m", filename);
         scanf(" %c", &choice);
         if (choice != 'y' && choice != 'Y')
         {
-            printf("已取消导出。\n");
+            printf("\033[1;36m已取消导出。\033[1;0m\n");
             return;
         }
     }
@@ -69,7 +69,7 @@ void exportData(Student *students, int count, const char *filename)
     FILE *file = fopen(filename, "w");
     if (!file)
     {
-        perror("无法打开文件进行写入");
+        perror("\033[1;31m无法打开文件进行写入\033[1;0m");
         return;
     }
 
@@ -84,5 +84,5 @@ void exportData(Student *students, int count, const char *filename)
     }
 
     fclose(file);
-    printf("数据导出成功，共导出 %d 名学生的信息。\n", count);
+    printf("\033[1;36m数据导出成功，共导出 %d 名学生的信息。\033[1;0m\n", count);
 }

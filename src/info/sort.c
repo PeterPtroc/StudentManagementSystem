@@ -24,12 +24,12 @@ void sortStudentsByTotalScore(Student students[], int count)
     // 输出排序结果
     for (int i = 0; i < count; i++)
     {
-        printf("名次：%d，学号：%d，姓名：%s，总成绩：", i+1, students[i].num, students[i].name);
+        printf("\033[1;36m名次：%d，学号：%d，姓名：%s，总成绩：\033[1;0m", i+1, students[i].num, students[i].name);
         int total = 0;
         for (int j = 0; j < COURSE_NUM; j++)
         {
             total += students[i].score[j];
         }
-        printf("%d\n", total);
+        printf("\033[1;36m%d\033[1;0m\n", total);
     }
 }

@@ -18,11 +18,11 @@
 #include "utils.h"
 #include "gpa.h"
 
-#define INITIAL_CAPACITY 1000
+#define INITIAL_CAPACITY 10
 
 void waitForKeyPress()
 {
-    printf("按任意键返回...\n");
+    printf("\033[1;36m按任意键返回...\033[1;0m\n");
     clean_stdin();
     // getchar(); // 等待任意键
 }
@@ -41,7 +41,7 @@ int main()
     Student *students = (Student *)malloc(INITIAL_CAPACITY * sizeof(Student));
     if (students == NULL)
     {
-        fprintf(stderr, "内存分配失败\n");
+        fprintf(stderr, "\033[1;31m内存分配失败\033[1;0m\n");
         return 1;
     }
     int count = 0;
@@ -49,25 +49,25 @@ int main()
     do
     {
         clearScreen();
-        printf("\n学生成绩管理系统\n");
+        printf("\n\033[1;36m欢\033[1;35m迎\033[1;34m使\033[1;33m用\033[1;32m学\033[1;31m生\033[1;36m成\033[1;35m绩\033[1;34m管\033[1;33m理\033[1;32m系\033[1;31m统\033[1;0m\n");
         printf("*********************************\n");
-        printf("*\t1. 成绩录入\t\t*\n");
-        printf("*\t2. 成绩查询\t\t*\n");
-        printf("*\t3. 成绩排序\t\t*\n");
-        printf("*\t4. 成绩统计\t\t*\n");
-        printf("*\t5. 绩点计算\t\t*\n");
-        printf("*\t6. 绩点排名\t\t*\n");
-        printf("*\t7. 最高分查询\t\t*\n");
-        printf("*\t8. 最低分查询\t\t*\n");
-        printf("*\t9. 平均分计算\t\t*\n");
-        printf("*\tA. 班级最高分查询\t*\n");
-        printf("*\tB. 班级最低分查询\t*\n");
-        printf("*\tC. 班级平均分计算\t*\n");
-        printf("*\tD. 数据导入\t\t*\n");
-        printf("*\tE. 数据导出\t\t*\n");
-        printf("*\t0. 退出\t\t\t*\n");
+        printf("*\033[1;36m\t1. 成绩录入\t\t\033[0m*\n");
+        printf("*\033[1;36m\t2. 成绩查询\t\t\033[0m*\n");
+        printf("*\033[1;36m\t3. 成绩排序\t\t\033[0m*\n");
+        printf("*\033[1;36m\t4. 成绩统计\t\t\033[0m*\n");
+        printf("*\033[1;35m\t5. 绩点计算\t\t\033[0m*\n");
+        printf("*\033[1;35m\t6. 绩点排名\t\t\033[0m*\n");
+        printf("*\033[1;34m\t7. 最高分查询\t\t\033[0m*\n");
+        printf("*\033[1;34m\t8. 最低分查询\t\t\033[0m*\n");
+        printf("*\033[1;34m\t9. 平均分计算\t\t\033[0m*\n");
+        printf("*\033[1;33m\tA. 班级最高分查询\t\033[0m*\n");
+        printf("*\033[1;33m\tB. 班级最低分查询\t\033[0m*\n");
+        printf("*\033[1;33m\tC. 班级平均分计算\t\033[0m*\n");
+        printf("*\033[1;32m\tD. 数据导入\t\t\033[0m*\n");
+        printf("*\033[1;32m\tE. 数据导出\t\t\033[0m*\n");
+        printf("*\033[1;31m\t0. 退出\t\t\t\033[0m*\n");
         printf("*********************************\n");
-        printf("请输入您的选择：");
+        printf("\033[1;33m请输入您的选择(一个字符)：\033[0m");
 
         // 读取用户输入
         choice = getchar();
@@ -184,10 +184,10 @@ int main()
             waitForKeyPress();
             break;
         case '0':
-            printf("退出系统。\n");
+            printf("\033[1;31m正在退出系统\033[1;0m\n");
             break;
         default:
-            printf("无效的选择。\n");
+            printf("\033[1;31m无效的选择。\033[1;0m\n");
             waitForKeyPress();
         }
     } while (choice != '0');

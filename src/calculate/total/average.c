@@ -5,7 +5,7 @@ void calculateAverageScore(Student students[], int count, int courseNumber)
 {
     if(count == 0)
     {
-        printf("请先添加学生！\n");
+        printf("\033[1;31m请先添加学生！\033[1;0m\n");
         return;
     }
     int totalScore = 0;
@@ -14,5 +14,5 @@ void calculateAverageScore(Student students[], int count, int courseNumber)
         totalScore += students[i].score[courseNumber - 1];
     }
     float average = (float)totalScore / count;
-    printf("课程%d的平均分是%.2f\n", courseNumber, average);
+    printf("\033[1;36m课程%d的平均分是%.2f\033[1;0m\n", courseNumber, average);
 }
