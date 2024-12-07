@@ -1,52 +1,26 @@
 #include <stdio.h>
 #include "sort.h"
 
-void swap_in_total_sort(Student *a, Student *b)
-{
-    Student temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-int partition_in_total_sort(Student students[], int low, int high)
-{
-    int pivot = 0;
-    for (int k = 0; k < COURSE_NUM; k++)
-    {
-        pivot += students[high].score[k];
-    }
-    int i = low - 1;
-    for (int j = low; j < high; j++)
-    {
-        int totalScore = 0;
-        for (int k = 0; k < COURSE_NUM; k++)
-        {
-            totalScore += students[j].score[k];
-        }
-        if (totalScore > pivot)
-        {
-            i++;
-            swap_in_total_sort(&students[i], &students[j]);
-        }
-    }
-    swap_in_total_sort(&students[i + 1], &students[high]);
-    return i + 1;
-}
-
-void quickSort_in_total_sort(Student students[], int low, int high)
-{
-    if (low < high)
-    {
-        int pi = partition_in_total_sort(students, low, high);
-        quickSort_in_total_sort(students, low, pi - 1);
-        quickSort_in_total_sort(students, pi + 1, high);
-    }
-}
-
 void sortStudentsByTotalScore(Student students[], int count)
 {
-    quickSort_in_total_sort(students, 0, count - 1);
-
+    for (int i = 0; i < count - 1; i++)
+    {
+        for (int j = 0; j < count - i - 1; j++)
+        {
+            int totalScore1 = 0, totalScore2 = 0;
+            for (int k = 0; k < COURSE_NUM; k++)
+            {
+                totalScore1 += students[j].score[k];
+                totalScore2 += students[j + 1].score[k];
+            }
+            if (totalScore1 < totalScore2)
+            {
+                Student temp = students[j];
+                students[j] = students[j + 1];
+                students[j + 1] = temp;
+            }
+        }
+    }
     // 输出排序结果
     for (int i = 0; i < count; i++)
     {
