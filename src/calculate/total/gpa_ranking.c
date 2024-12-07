@@ -2,6 +2,39 @@
 #include "gpa_ranking.h"
 #include "gpa.h"
 
+void swap_in_gpa_sort(Student *a, Student *b)
+{
+    Student temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int partition_in_gpa_sort(Student students[], int low, int high)
+{
+    float pivot = students[high].gpa;
+    int i = low - 1;
+    for (int j = low; j < high; j++)
+    {
+        if (students[j].gpa > pivot)
+        {
+            i++;
+            swap_in_gpa_sort(&students[i], &students[j]);
+        }
+    }
+    swap_in_gpa_sort(&students[i + 1], &students[high]);
+    return i + 1;
+}
+
+void quickSort_in_gpa_sort(Student students[], int low, int high)
+{
+    if (low < high)
+    {
+        int pi = partition_in_gpa_sort(students, low, high);
+        quickSort_in_gpa_sort(students, low, pi - 1);
+        quickSort_in_gpa_sort(students, pi + 1, high);
+    }
+}
+
 void sortStudentsByGPA(Student students[], int count)
 {
     // 计算每个学生的绩点
@@ -11,18 +44,7 @@ void sortStudentsByGPA(Student students[], int count)
     }
 
     // 按绩点降序排序
-    for (int i = 0; i < count - 1; i++)
-    {
-        for (int j = 0; j < count - i - 1; j++)
-        {
-            if (students[j].gpa < students[j + 1].gpa)
-            {
-                Student temp = students[j];
-                students[j] = students[j + 1];
-                students[j + 1] = temp;
-            }
-        }
-    }
+    quickSort_in_gpa_sort(students, 0, count - 1);
 
     printf("\033[1;36m绩点排名如下：\033[1;0m\n");
     for (int i = 0; i < count; i++)

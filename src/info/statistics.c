@@ -40,7 +40,7 @@ void statisticsByCourse(Student students[], int count, int courseIndex)
         Node *p = range[i];
         while (p)
         {
-            printf("\033[1;36m学号：%d，姓名：%s\033[1;0m\n", p->student.num, p->student.name);
+            printf("\033[1;36m学号：%d，姓名：%s，成绩：%d\033[1;0m\n", p->student.num, p->student.name, p->student.score[courseIndex - 1]);
             p = p->next;
         }
     }
