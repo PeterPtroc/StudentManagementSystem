@@ -104,7 +104,7 @@ int main()
         {
             int courseNumber;
             inputCourseNumber(&courseNumber);
-            statisticsByCourse(students, count, (CourseNumber)courseNumber);
+            statisticsByCourse(students, count, courseNumber);
             waitForKeyPress();
             break;
         }
@@ -123,7 +123,7 @@ int main()
             int courseNumber;
             inputCourseNumber(&courseNumber);
 
-            findHighestScore(students, count, (CourseNumber)courseNumber);
+            findHighestScore(students, count, courseNumber);
             waitForKeyPress();
             break;
         }
@@ -132,7 +132,7 @@ int main()
             int courseNumber;
             inputCourseNumber(&courseNumber);
 
-            findLowestScore(students, count, (CourseNumber)courseNumber);
+            findLowestScore(students, count, courseNumber);
             waitForKeyPress();
             break;
         }
@@ -141,7 +141,7 @@ int main()
             int courseNumber;
             inputCourseNumber(&courseNumber);
 
-            calculateAverageScore(students, count, (CourseNumber)courseNumber);
+            calculateAverageScore(students, count, courseNumber);
             waitForKeyPress();
             break;
         }
@@ -154,7 +154,7 @@ int main()
             inputClass(className, sizeof(className));
             inputCourseNumber(&courseNumber);
 
-            findClassHighestScore(students, count, className, (CourseNumber)courseNumber);
+            findClassHighestScore(students, count, className, courseNumber);
             waitForKeyPress();
             break;
         }
@@ -167,7 +167,7 @@ int main()
             inputClass(className, sizeof(className));
             inputCourseNumber(&courseNumber);
 
-            findClassLowestScore(students, count, className, (CourseNumber)courseNumber);
+            findClassLowestScore(students, count, className, courseNumber);
             waitForKeyPress();
             break;
         }
@@ -180,7 +180,7 @@ int main()
             inputClass(className, sizeof(className));
             inputCourseNumber(&courseNumber);
 
-            calculateClassAverageScore(students, count, className, (CourseNumber)courseNumber);
+            calculateClassAverageScore(students, count, className, courseNumber);
             waitForKeyPress();
             break;
         }
