@@ -38,6 +38,9 @@ endif()
 # 输出可执行文件
 add_executable(StudentManagementSystem ${SOURCES} ${RESOURCE_FILES})
 
+# 加上符号表，方便调试
+target_compile_options(G_StudentManagementSystem PRIVATE -g)
+
 # 链接资源文件
 if(USE_MINGW)
     target_sources(StudentManagementSystem PRIVATE ${RESOURCE_FILES})
