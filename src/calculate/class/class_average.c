@@ -2,8 +2,14 @@
 #include <string.h>
 #include "class_average.h"
 
-void calculateClassAverageScore(Student students[], int count, const char *className, int courseNumber)
+void calculateClassAverageScore(Student students[], int count)
 {
+    char className[20];
+    int courseNumber;
+
+    inputClass(className, sizeof(className));
+    inputCourseNumber(&courseNumber);
+
     int totalScore = 0;
     int classCount = 0;
     for (int i = 0; i < count; i++)

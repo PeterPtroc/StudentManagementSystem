@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "student.h"
-#include "input.h"
 #include "query.h"
 #include "sort.h"
 #include "statistics.h"
@@ -16,7 +15,6 @@
 #include "class_average.h"
 #include "data_io.h"
 #include "utils.h"
-#include "gpa.h"
 #ifdef _WIN32
 #include <windows.h>
 #include "resource.h"
@@ -102,9 +100,7 @@ int main()
             break;
         case '4':
         {
-            int courseNumber;
-            inputCourseNumber(&courseNumber);
-            statisticsByCourse(students, count, courseNumber);
+            statisticsByCourse(students, count);
             waitForKeyPress();
             break;
         }
@@ -120,67 +116,40 @@ int main()
             break;
         case '7':
         {
-            int courseNumber;
-            inputCourseNumber(&courseNumber);
-
-            findHighestScore(students, count, courseNumber);
+            findHighestScore(students, count);
             waitForKeyPress();
             break;
         }
         case '8':
         {
-            int courseNumber;
-            inputCourseNumber(&courseNumber);
-
-            findLowestScore(students, count, courseNumber);
+            findLowestScore(students, count);
             waitForKeyPress();
             break;
         }
         case '9':
         {
-            int courseNumber;
-            inputCourseNumber(&courseNumber);
-
-            calculateAverageScore(students, count, courseNumber);
+            calculateAverageScore(students, count);
             waitForKeyPress();
             break;
         }
         case 'a':
         case 'A':
         {
-            char className[20];
-            int courseNumber;
-
-            inputClass(className, sizeof(className));
-            inputCourseNumber(&courseNumber);
-
-            findClassHighestScore(students, count, className, courseNumber);
+            findClassHighestScore(students, count);
             waitForKeyPress();
             break;
         }
         case 'b':
         case 'B':
         {
-            char className[20];
-            int courseNumber;
-
-            inputClass(className, sizeof(className));
-            inputCourseNumber(&courseNumber);
-
-            findClassLowestScore(students, count, className, courseNumber);
+            findClassLowestScore(students, count);
             waitForKeyPress();
             break;
         }
         case 'c':
         case 'C':
         {
-            char className[20];
-            int courseNumber;
-
-            inputClass(className, sizeof(className));
-            inputCourseNumber(&courseNumber);
-
-            calculateClassAverageScore(students, count, className, courseNumber);
+            calculateClassAverageScore(students, count);
             waitForKeyPress();
             break;
         }

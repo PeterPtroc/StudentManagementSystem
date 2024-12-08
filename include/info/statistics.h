@@ -2,7 +2,8 @@
 #define STATISTICS_H
 
 #include "student.h"
+#include "input.h"
 
-void statisticsByCourse(Student students[], int count, int courseIndex);
+void statisticsByCourse(Student students[], int count);
 
 #endif

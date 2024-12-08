@@ -2,7 +2,8 @@
 #define HIGHEST_H
 
 #include "student.h"
+#include "input.h"
 
-void findHighestScore(Student students[], int count, int courseNumber);
+void findHighestScore(Student students[], int count);
 
 #endif

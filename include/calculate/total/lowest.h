@@ -2,7 +2,8 @@
 #define LOWEST_H
 
 #include "student.h"
+#include "input.h"
 
-void findLowestScore(Student students[], int count, int courseNumber);
+void findLowestScore(Student students[], int count);
 
 #endif

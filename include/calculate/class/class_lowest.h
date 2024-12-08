@@ -2,7 +2,8 @@
 #define CLASS_LOWEST_H
 
 #include "student.h"
+#include "input.h"
 
-void findClassLowestScore(Student students[], int count, const char *className, int courseNumber);
+void findClassLowestScore(Student students[], int count);
 
 #endif

@@ -8,8 +8,11 @@ typedef struct Node
     struct Node *next;
 } Node;
 
-void statisticsByCourse(Student students[], int count, int courseIndex)
+void statisticsByCourse(Student students[], int count)
 {
+    int courseIndex;
+    inputCourseNumber(&courseIndex);
+
     Node *range[5] = {NULL, NULL, NULL, NULL, NULL};
     int counts[5] = {0};
     for (int i = 0; i < count; i++)

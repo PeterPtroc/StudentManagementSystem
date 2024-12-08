@@ -2,7 +2,8 @@
 #define CLASS_AVERAGE_H
 
 #include "student.h"
+#include "input.h"
 
-void calculateClassAverageScore(Student students[], int count, const char *className, int courseNumber);
+void calculateClassAverageScore(Student students[], int count);
 
 #endif

@@ -2,8 +2,14 @@
 #include <string.h>
 #include "class_lowest.h"
 
-void findClassLowestScore(Student students[], int count, const char *className, int courseNumber)
+void findClassLowestScore(Student students[], int count)
 {
+    char className[20];
+    int courseNumber;
+
+    inputClass(className, sizeof(className));
+    inputCourseNumber(&courseNumber);
+
     int minScore = 101;
     for (int i = 0; i < count; i++)
     {
