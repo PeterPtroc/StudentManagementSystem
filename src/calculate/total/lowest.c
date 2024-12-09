@@ -20,7 +20,7 @@ void findLowestScore(Student students[], int count)
             minScore = students[i].score[courseNumber - 1];
         }
     }
-    printf("\033[1;36m课程%d的最低分是%d，学生有：\033[1;0m\n", courseNumber, minScore);
+    printf("\033[1;36m课程[%s]的最低分是%d，学生有：\033[1;0m\n", courseNames[(courseNumber - 1) * 3], minScore);
     for (int i = 0; i < count; i++)
     {
         if (students[i].score[courseNumber - 1] == minScore)

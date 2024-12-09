@@ -13,7 +13,7 @@ void queryStudent(Student students[], int count)
             printf("\033[1;36m姓名：%s\033[1;0m\n", students[i].name);
             for (int j = 0; j < COURSE_NUM; j++)
             {
-                printf("\033[1;36m课程%d成绩：%d\033[1;0m\n", j + 1, students[i].score[j]);
+                printf("\033[1;36m%s成绩：%d\033[1;0m\n", courseNames[j * 3], students[i].score[j]);
             }
             return;
         }

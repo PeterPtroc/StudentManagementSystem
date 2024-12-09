@@ -23,7 +23,7 @@ void calculateClassAverageScore(Student students[], int count)
     if (classCount > 0)
     {
         float average = (float)totalScore / classCount;
-        printf("\033[1;36m班级%s，课程%d的平均分是%.2f\033[1;0m\n", className, courseNumber, average);
+        printf("\033[1;36m班级%s，课程[%s]的平均分是%.2f\033[1;0m\n", className, courseNames[(courseNumber - 1) * 3], average);
     }
     else
     {

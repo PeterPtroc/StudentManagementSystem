@@ -20,7 +20,7 @@ void findHighestScore(Student students[], int count)
             maxScore = students[i].score[courseNumber - 1];
         }
     }
-    printf("\033[1;36m课程%d的最高分是%d，学生有：\033[1;0m\n", courseNumber, maxScore);
+    printf("\033[1;36m课程[%s]的最高分是%d，学生有：\033[1;0m\n", courseNames[(courseNumber - 1) * 3], maxScore);
     for (int i = 0; i < count; i++)
     {
         if (students[i].score[courseNumber - 1] == maxScore)

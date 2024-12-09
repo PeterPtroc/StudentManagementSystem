@@ -70,6 +70,43 @@ int validateCourseNumber(int num)
     return num >= 1 && num <= 10;
 }
 
+int getCourseNumber(const char *courseName)
+{
+    for (int i = 0; i < sizeof(courseNames) / sizeof(courseNames[0]); i++)
+    {
+        if (strcmp(courseNames[i], courseName) == 0)
+        {
+            return (int)((i / 3) + 1);
+        }
+    }
+    return -1; // 返回无效值表示未找到
+}
+
+void inputCourseNumber(int *num)
+{
+    char buffer[BUFFER_SIZE];
+    do
+    {
+        printf("\033[1;33m请输入课程名称(语数外物化生政健编史): \033[1;0m");
+        if (fgets(buffer, sizeof(buffer), stdin) != NULL)
+        {
+            // 移除额外读入的换行符
+#ifdef _WIN32
+            buffer[strcspn(buffer, "\r\n")] = '\0';
+#else
+            buffer[strcspn(buffer, "\n")] = '\0';
+#endif
+            int course = getCourseNumber(buffer);
+            if (course != -1)
+            {
+                *num = course;
+                break;
+            }
+        }
+        fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的课程名称。\033[1;0m\n");
+    } while (1);
+}
+
 void inputStudentNumber(int *num)
 {
     char buffer[BUFFER_SIZE];
@@ -87,31 +124,25 @@ void inputStudentNumber(int *num)
     } while (1);
 }
 
-void inputCourseNumber(int *num)
-{
-    char buffer[BUFFER_SIZE];
-    do
-    {
-        printf("\033[1;33m请输入课程序号（1-10）：\033[1;0m");
-        if (fgets(buffer, sizeof(buffer), stdin) == NULL || sscanf(buffer, "%d", num) != 1 || !validateCourseNumber(*num))
-        {
-            fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的课程序号。\033[1;0m\n");
-        }
-        else
-        {
-            break;
-        }
-    } while (1);
-}
+// void inputCourseNumber(int *num)
+// {
+//     char buffer[BUFFER_SIZE];
+//     do
+//     {
+//         printf("\033[1;33m请输入课程序号（1-10）：\033[1;0m");
+//         if (fgets(buffer, sizeof(buffer), stdin) == NULL || sscanf(buffer, "%d", num) != 1 || !validateCourseNumber(*num))
+//         {
+//             fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的课程序号。\033[1;0m\n");
+//         }
+//         else
+//         {
+//             break;
+//         }
+//     } while (1);
+// }
 
 void inputName(char *name, size_t size)
 {
-#ifdef _WIN32
-    // 设置控制台输入和输出编码为 UTF-8
-    SetConsoleCP(CP_UTF8);
-    SetConsoleOutputCP(CP_UTF8);
-#endif
-
     do
     {
         printf("\033[1;33m请输入姓名：\033[1;0m");
@@ -206,7 +237,7 @@ void inputStudent(Student *stu)
 
     for (int i = 0; i < COURSE_NUM; i++)
     {
-        printf("\033[1;33m请输入第%d门课程的信息:\033[1;0m\n", i + 1);
+        printf("\033[1;33m请输入课程[%s]的信息:\033[1;0m\n", courseNames[i * 3]);
         inputScore(&stu->score[i]);
         inputCredit(&stu->credit[i]);
     }

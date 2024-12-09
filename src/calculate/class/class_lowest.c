@@ -26,7 +26,7 @@ void findClassLowestScore(Student students[], int count)
         printf("\033[1;31m班级%s还没有添加学生！\033[1;0m\n", className);
         return;
     }
-    printf("\033[1;36m班级%s，课程%d的最低分是%d，学生有：\033[1;0m\n", className, courseNumber, minScore);
+    printf("\033[1;36m班级%s，课程[%s]的最低分是%d，学生有：\033[1;0m\n", className, courseNames[(courseNumber - 1) * 3], minScore);
     for (int i = 0; i < count; i++)
     {
         if (strcmp(students[i].class, className) == 0)

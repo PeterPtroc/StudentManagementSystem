@@ -38,9 +38,11 @@ void sub_menu_data_io(Student students[], int count);
 int main()
 {
 #ifdef _WIN32
-    // 在win平台下设置控制台输出编码为UTF-8
+    // 在win平台下设置控制台输入和输出编码均为UTF-8
+    SetConsoleCP(CP_UTF8);
     SetConsoleOutputCP(CP_UTF8);
 #endif
+
     fake_process("正在初始化系统...", 2);
     Student *students = (Student *)malloc(INITIAL_CAPACITY * sizeof(Student));
     if (students == NULL)
@@ -79,7 +81,7 @@ int main()
         switch (choice)
         {
         case '1':
-        {            
+        {
             inputStudent(&students[count]);
             count++;
             waitForKeyPress();
@@ -167,34 +169,33 @@ void sub_menu_course_total(Student students[], int count)
 
         switch (choice)
         {
-            case '1':
-            {
-                findHighestScore(students, count);
-                waitForKeyPress();
-                break;
-            }
-            case '2':
-            {
-                findLowestScore(students, count);
-                waitForKeyPress();
-                break;
-            }
-            case '3':
-            {
-                calculateAverageScore(students, count);
-                waitForKeyPress();
-                break;
-            }
-            case '0':
-                break;
-            default:
-            {
+        case '1':
+        {
+            findHighestScore(students, count);
+            waitForKeyPress();
+            break;
+        }
+        case '2':
+        {
+            findLowestScore(students, count);
+            waitForKeyPress();
+            break;
+        }
+        case '3':
+        {
+            calculateAverageScore(students, count);
+            waitForKeyPress();
+            break;
+        }
+        case '0':
+            break;
+        default:
+        {
             printf("\033[1;31m无效的选择。\033[1;0m\n");
             waitForKeyPress();
-            }
-        
         }
-    }while (choice != '0');
+        }
+    } while (choice != '0');
     return;
 }
 
@@ -217,36 +218,35 @@ void sub_menu_course_class(Student students[], int count)
 
         switch (choice)
         {
-            case '1':
-            {
-                findClassHighestScore(students, count);
-                waitForKeyPress();
-                break;
-            }
-            case '2':
-            {
-                findClassLowestScore(students, count);
-                waitForKeyPress();
-                break;
-            }
-            case '3':
-            {
-                calculateClassAverageScore(students, count);
-                waitForKeyPress();
-                break;
-            }
-            case '0':
-                break;
-            default:
-            {
+        case '1':
+        {
+            findClassHighestScore(students, count);
+            waitForKeyPress();
+            break;
+        }
+        case '2':
+        {
+            findClassLowestScore(students, count);
+            waitForKeyPress();
+            break;
+        }
+        case '3':
+        {
+            calculateClassAverageScore(students, count);
+            waitForKeyPress();
+            break;
+        }
+        case '0':
+            break;
+        default:
+        {
             printf("\033[1;31m无效的选择。\033[1;0m\n");
             waitForKeyPress();
-            }
         }
-    }while (choice != '0');
+        }
+    } while (choice != '0');
     return;
 }
-
 
 void sub_menu_data_io(Student *students, int count)
 {
@@ -266,26 +266,26 @@ void sub_menu_data_io(Student *students, int count)
 
         switch (choice)
         {
-            case '1':
-            {
-                importData(&students, &count, "data/export.ini");
-                waitForKeyPress();
-                break;
-            }
-            case '2':
-            {
-                exportData(students, count, "data/export.ini");
-                waitForKeyPress();
-                break;
-            }
-            case '0':
-                break;
-            default:
-            {
+        case '1':
+        {
+            importData(&students, &count, "data/export.ini");
+            waitForKeyPress();
+            break;
+        }
+        case '2':
+        {
+            exportData(students, count, "data/export.ini");
+            waitForKeyPress();
+            break;
+        }
+        case '0':
+            break;
+        default:
+        {
             printf("\033[1;31m无效的选择。\033[1;0m\n");
             waitForKeyPress();
-            }
         }
-    }while (choice != '0');
+        }
+    } while (choice != '0');
     return;
 }
