@@ -31,15 +31,6 @@ void waitForKeyPress()
     // getchar(); // 等待任意键
 }
 
-void clearScreen()
-{
-#ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
-#endif
-}
-
 void sub_menu_course_total(Student students[], int count);
 void sub_menu_course_class(Student students[], int count);
 void sub_menu_data_io(Student students[], int count);
@@ -50,7 +41,7 @@ int main()
     // 在win平台下设置控制台输出编码为UTF-8
     SetConsoleOutputCP(CP_UTF8);
 #endif
-
+    fake_process("正在初始化系统...", 2);
     Student *students = (Student *)malloc(INITIAL_CAPACITY * sizeof(Student));
     if (students == NULL)
     {
@@ -214,9 +205,9 @@ void sub_menu_course_class(Student students[], int count)
     {
         clearScreen();
         printf("*********************************\n");
-        printf("*\033[1;33m\t1. 班级最高分查询\t\t\033[0m*\n");
-        printf("*\033[1;33m\t2. 班级最低分查询\t\t\033[0m*\n");
-        printf("*\033[1;33m\t3. 班级平均分计算\t\t\033[0m*\n");
+        printf("*\033[1;33m\t1. 班级最高分查询\t\033[0m*\n");
+        printf("*\033[1;33m\t2. 班级最低分查询\t\033[0m*\n");
+        printf("*\033[1;33m\t3. 班级平均分计算\t\033[0m*\n");
         printf("*\033[1;31m\t0. 返回\t\t\t\033[0m*\n");
         printf("*********************************\n");
         printf("\033[1;33m请输入您的选择(一个字符)：\033[0m");

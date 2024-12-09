@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "gpa_ranking.h"
 #include "gpa.h"
+#include "utils.h"
 
 void sortStudentsByGPA(Student students[], int count)
 {
@@ -24,6 +25,7 @@ void sortStudentsByGPA(Student students[], int count)
         }
     }
 
+    fake_process("正在处理中...", 1.5);
     printf("\033[1;36m绩点排名如下：\033[1;0m\n");
     for (int i = 0; i < count; i++)
     {
