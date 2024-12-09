@@ -18,11 +18,9 @@
 #ifdef _WIN32
 #include <windows.h>
 #include "resource.h"
-#else
-#include <unistd.h>
 #endif
 
-#define INITIAL_CAPACITY 10
+#define INITIAL_CAPACITY 10 // 初始容量
 
 void waitForKeyPress()
 {
@@ -55,6 +53,9 @@ int main()
     }
     int count = 0;
     char choice;
+
+    importData_while_start(&students, &count, "data/export.ini");
+
     do
     {
         clearScreen();

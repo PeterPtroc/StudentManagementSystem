@@ -3,12 +3,65 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #ifdef _WIN32
+#include <windows.h>
 #include <direct.h>
 #define mkdir _mkdir
+#else
+#include <unistd.h>
 #endif
 #include "data_io.h"
 
 #define INITIAL_CAPACITY 100
+
+void importData_while_start(Student **students, int *count, const char *filename)
+{
+    FILE *file = fopen(filename, "r");
+    if (!file)
+    {
+        // 文件打不开
+        return;
+    }
+
+    int capacity = INITIAL_CAPACITY;
+    *students = (Student *)malloc(capacity * sizeof(Student));
+    if (*students == NULL)
+    {
+        // 内存分配失败
+        fclose(file);
+        return;
+    }
+
+    *count = 0;
+    while (fscanf(file, "%d %s %s", &(*students)[*count].num, (*students)[*count].name, (*students)[*count].class) != EOF)
+    {
+        for (int i = 0; i < COURSE_NUM; i++)
+        {
+            fscanf(file, "%d %f", &(*students)[*count].score[i], &(*students)[*count].credit[i]);
+        }
+        (*count)++;
+
+        // 如果超过当前容量，重新分配内存
+        if (*count >= capacity)
+        {
+            capacity *= 2;
+            *students = (Student *)realloc(*students, capacity * sizeof(Student));
+            if (*students == NULL)
+            {
+                // 内存重新分配失败
+                fclose(file);
+                return;
+            }
+        }
+    }
+
+    fclose(file);
+    printf("\033[1;36m从data/export.ini导入成功，共导入 %d 名学生的信息。\033[1;0m\n", *count);
+#ifdef _WIN32
+    Sleep(1500);
+#else
+    sleep(2);
+#endif
+}
 
 void importData(Student **students, int *count, const char *filename)
 {
