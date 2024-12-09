@@ -55,7 +55,7 @@ void importData_while_start(Student **students, int *count, const char *filename
     }
 
     fclose(file);
-    printf("\033[1;36m从data/export.ini导入成功，共导入 %d 名学生的信息。\033[1;0m\n", *count);
+    printf("\033[1;32m从data/export.ini导入成功，共 %d 名学生。\033[1;0m\n", *count);
 #ifdef _WIN32
     Sleep(1500);
 #else

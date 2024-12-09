@@ -39,11 +39,11 @@ void statisticsByCourse(Student students[], int count)
     const char *labels[] = {"90~100", "80~89", "70~79", "60~69", "0~59"};
     for (int i = 0; i < 5; i++)
     {
-        printf("\033[1;36m分数段%s，共有%d人：\033[1;0m\n", labels[i], counts[i]);
+        printf("\033[1;33m分数段%s，共有%d人：\033[1;0m\n", labels[i], counts[i]);
         Node *p = range[i];
         while (p)
         {
-            printf("\033[1;36m学号：%d，姓名：%s，成绩：%d\033[1;0m\n", p->student.num, p->student.name, p->student.score[courseIndex - 1]);
+            printf("\033[1;36m学号：%d，姓名：%s\033[1;0m\n", p->student.num, p->student.name);
             p = p->next;
         }
     }

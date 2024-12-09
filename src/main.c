@@ -18,6 +18,8 @@
 #ifdef _WIN32
 #include <windows.h>
 #include "resource.h"
+#else
+#include <unistd.h>
 #endif
 
 #define INITIAL_CAPACITY 10 // 初始容量
@@ -37,6 +39,10 @@ void clearScreen()
     system("clear");
 #endif
 }
+
+void sub_menu_course_total(Student students[], int count);
+void sub_menu_course_class(Student students[], int count);
+void sub_menu_data_io(Student students[], int count);
 
 int main()
 {
@@ -67,14 +73,9 @@ int main()
         printf("*\033[1;36m\t4. 成绩统计\t\t\033[0m*\n");
         printf("*\033[1;35m\t5. 绩点计算\t\t\033[0m*\n");
         printf("*\033[1;35m\t6. 绩点排名\t\t\033[0m*\n");
-        printf("*\033[1;34m\t7. 最高分查询\t\t\033[0m*\n");
-        printf("*\033[1;34m\t8. 最低分查询\t\t\033[0m*\n");
-        printf("*\033[1;34m\t9. 平均分计算\t\t\033[0m*\n");
-        printf("*\033[1;33m\tA. 班级最高分查询\t\033[0m*\n");
-        printf("*\033[1;33m\tB. 班级最低分查询\t\033[0m*\n");
-        printf("*\033[1;33m\tC. 班级平均分计算\t\033[0m*\n");
-        printf("*\033[1;32m\tD. 数据导入\t\t\033[0m*\n");
-        printf("*\033[1;32m\tE. 数据导出\t\t\033[0m*\n");
+        printf("*\033[1;34m\t7. 课程分数数据查询\t\033[0m*\n");
+        printf("*\033[1;33m\t8. 班级课程分数数据查询\t\033[0m*\n");
+        printf("*\033[1;32m\t9. 数据导入导出\t\t\033[0m*\n");
         printf("*\033[1;31m\t0. 退出\t\t\t\033[0m*\n");
         printf("*********************************\n");
         printf("\033[1;33m请输入您的选择(一个字符)：\033[0m");
@@ -87,18 +88,24 @@ int main()
         switch (choice)
         {
         case '1':
+        {            
             inputStudent(&students[count]);
             count++;
             waitForKeyPress();
             break;
+        }
         case '2':
+        {
             queryStudent(students, count);
             waitForKeyPress();
             break;
+        }
         case '3':
+        {
             sortStudentsByTotalScore(students, count);
             waitForKeyPress();
             break;
+        }
         case '4':
         {
             statisticsByCourse(students, count);
@@ -117,53 +124,19 @@ int main()
             break;
         case '7':
         {
-            findHighestScore(students, count);
-            waitForKeyPress();
+            sub_menu_course_total(students, count);
             break;
         }
         case '8':
         {
-            findLowestScore(students, count);
-            waitForKeyPress();
+            sub_menu_course_class(students, count);
             break;
         }
         case '9':
         {
-            calculateAverageScore(students, count);
-            waitForKeyPress();
+            sub_menu_data_io(students, count);
             break;
         }
-        case 'a':
-        case 'A':
-        {
-            findClassHighestScore(students, count);
-            waitForKeyPress();
-            break;
-        }
-        case 'b':
-        case 'B':
-        {
-            findClassLowestScore(students, count);
-            waitForKeyPress();
-            break;
-        }
-        case 'c':
-        case 'C':
-        {
-            calculateClassAverageScore(students, count);
-            waitForKeyPress();
-            break;
-        }
-        case 'd':
-        case 'D':
-            importData(&students, &count, "data/export.ini");
-            waitForKeyPress();
-            break;
-        case 'e':
-        case 'E':
-            exportData(students, count, "data/export.ini");
-            waitForKeyPress();
-            break;
         case '0':
             printf("\033[1;31m正在退出系统\033[1;0m\n");
 #ifdef _WIN32
@@ -182,4 +155,146 @@ int main()
     free(students);
 
     return 0;
+}
+
+void sub_menu_course_total(Student students[], int count)
+{
+    char choice;
+    do
+    {
+        clearScreen();
+        printf("*********************************\n");
+        printf("*\033[1;34m\t1. 最高分查询\t\t\033[0m*\n");
+        printf("*\033[1;34m\t2. 最低分查询\t\t\033[0m*\n");
+        printf("*\033[1;34m\t3. 平均分计算\t\t\033[0m*\n");
+        printf("*\033[1;31m\t0. 返回\t\t\t\033[0m*\n");
+        printf("*********************************\n");
+        printf("\033[1;33m请输入您的选择(一个字符)：\033[0m");
+
+        choice = getchar();
+        clean_stdin();
+
+        switch (choice)
+        {
+            case '1':
+            {
+                findHighestScore(students, count);
+                waitForKeyPress();
+                break;
+            }
+            case '2':
+            {
+                findLowestScore(students, count);
+                waitForKeyPress();
+                break;
+            }
+            case '3':
+            {
+                calculateAverageScore(students, count);
+                waitForKeyPress();
+                break;
+            }
+            case '0':
+                break;
+            default:
+            {
+            printf("\033[1;31m无效的选择。\033[1;0m\n");
+            waitForKeyPress();
+            }
+        
+        }
+    }while (choice != '0');
+    return;
+}
+
+void sub_menu_course_class(Student students[], int count)
+{
+    char choice;
+    do
+    {
+        clearScreen();
+        printf("*********************************\n");
+        printf("*\033[1;33m\t1. 班级最高分查询\t\t\033[0m*\n");
+        printf("*\033[1;33m\t2. 班级最低分查询\t\t\033[0m*\n");
+        printf("*\033[1;33m\t3. 班级平均分计算\t\t\033[0m*\n");
+        printf("*\033[1;31m\t0. 返回\t\t\t\033[0m*\n");
+        printf("*********************************\n");
+        printf("\033[1;33m请输入您的选择(一个字符)：\033[0m");
+
+        choice = getchar();
+        clean_stdin();
+
+        switch (choice)
+        {
+            case '1':
+            {
+                findClassHighestScore(students, count);
+                waitForKeyPress();
+                break;
+            }
+            case '2':
+            {
+                findClassLowestScore(students, count);
+                waitForKeyPress();
+                break;
+            }
+            case '3':
+            {
+                calculateClassAverageScore(students, count);
+                waitForKeyPress();
+                break;
+            }
+            case '0':
+                break;
+            default:
+            {
+            printf("\033[1;31m无效的选择。\033[1;0m\n");
+            waitForKeyPress();
+            }
+        }
+    }while (choice != '0');
+    return;
+}
+
+
+void sub_menu_data_io(Student *students, int count)
+{
+    char choice;
+    do
+    {
+        clearScreen();
+        printf("*********************************\n");
+        printf("*\033[1;32m\t1. 数据导入\t\t\033[0m*\n");
+        printf("*\033[1;32m\t2. 数据导出\t\t\033[0m*\n");
+        printf("*\033[1;31m\t0. 返回\t\t\t\033[0m*\n");
+        printf("*********************************\n");
+        printf("\033[1;33m请输入您的选择(一个字符)：\033[0m");
+
+        choice = getchar();
+        clean_stdin();
+
+        switch (choice)
+        {
+            case '1':
+            {
+                importData(&students, &count, "data/export.ini");
+                waitForKeyPress();
+                break;
+            }
+            case '2':
+            {
+                exportData(students, count, "data/export.ini");
+                waitForKeyPress();
+                break;
+            }
+            case '0':
+                break;
+            default:
+            {
+            printf("\033[1;31m无效的选择。\033[1;0m\n");
+            waitForKeyPress();
+            }
+        }
+    }while (choice != '0');
+    return;
 }
