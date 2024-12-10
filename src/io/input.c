@@ -18,7 +18,7 @@ int validateName(const char *name)
 {
     // 本来想用正则直接匹配中文的，但是好像实现不太对，就改成直接判断长度了
     size_t len = strlen(name);
-    if (len == 0 || len > 10)
+    if (len < 2 || len > 10)
     {
         return 0;
     }

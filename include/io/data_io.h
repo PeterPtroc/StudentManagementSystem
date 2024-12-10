@@ -2,6 +2,7 @@
 #define DATA_IO_H
 
 #include "student.h"
+#include "input.h"
 
 
 void importData_while_start(Student **students, int *count, const char *filename);
