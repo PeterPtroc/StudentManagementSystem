@@ -8,6 +8,7 @@
 
 #define BUFFER_SIZE 100
 
+//这部分用于验证和转换数据
 int validateStudentNumber(int num)
 {
     return num >= 20240000 && num <= 20249999;
@@ -70,7 +71,7 @@ int validateCourseNumber(int num)
     return num >= 1 && num <= 10;
 }
 
-int getCourseNumber(const char *courseName)
+int CourseName2CourseNumber(const char *courseName)
 {
     for (int i = 0; i < sizeof(courseNames) / sizeof(courseNames[0]); i++)
     {
@@ -82,13 +83,25 @@ int getCourseNumber(const char *courseName)
     return -1; // 返回无效值表示未找到
 }
 
+//这部分处理主要输入逻辑
+
+// 这里是读取的课程名，通过转换成课程号
 void inputCourseNumber(int *num)
 {
     char buffer[BUFFER_SIZE];
     do
     {
         printf("\033[1;33m请输入课程名称(语数外物化生政健编史): \033[1;0m");
-        if (fgets(buffer, sizeof(buffer), stdin) != NULL)
+        if (fgets(buffer, sizeof(buffer), stdin) == NULL)
+        {
+            if (feof(stdin))
+            {
+                printf("\n\033[1;31m检测到 EOF，程序退出!\033[1;0m\n");
+                exit(1);
+            }
+            fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的课程名称。\033[1;0m\n");
+        }
+        else
         {
             // 移除额外读入的换行符
 #ifdef _WIN32
@@ -96,14 +109,14 @@ void inputCourseNumber(int *num)
 #else
             buffer[strcspn(buffer, "\n")] = '\0';
 #endif
-            int course = getCourseNumber(buffer);
+            int course = CourseName2CourseNumber(buffer);
             if (course != -1)
             {
                 *num = course;
                 break;
             }
+            fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的课程名称。\033[1;0m\n");
         }
-        fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的课程名称。\033[1;0m\n");
     } while (1);
 }
 
@@ -113,7 +126,16 @@ void inputStudentNumber(int *num)
     do
     {
         printf("\033[1;33m请输入学号：\033[1;0m");
-        if (fgets(buffer, sizeof(buffer), stdin) == NULL || sscanf(buffer, "%d", num) != 1 || !validateStudentNumber(*num))
+        if (fgets(buffer, sizeof(buffer), stdin) == NULL)
+        {
+            if (feof(stdin))
+            {
+                printf("\n\033[1;31m检测到 EOF，程序退出!\033[1;0m\n");
+                exit(1);
+            }
+            fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的学号。\033[1;0m\n");
+        }
+        else if (sscanf(buffer, "%d", num) != 1 || !validateStudentNumber(*num))
         {
             fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的学号。\033[1;0m\n");
         }
@@ -148,6 +170,11 @@ void inputName(char *name, size_t size)
         printf("\033[1;33m请输入姓名：\033[1;0m");
         if (fgets(name, size, stdin) == NULL)
         {
+            if (feof(stdin))
+            {
+                printf("\n\033[1;31m检测到 EOF，程序退出!\033[1;0m\n");
+                exit(1);
+            }
             fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的姓名。\033[1;0m\n");
             continue;
         }
@@ -175,6 +202,11 @@ void inputClass(char *class, size_t size)
         printf("\033[1;33m请输入班级：\033[1;0m");
         if (fgets(class, size, stdin) == NULL)
         {
+            if (feof(stdin))
+            {
+                printf("\n\033[1;31m检测到 EOF，程序退出!\033[1;0m\n");
+                exit(1);
+            }
             fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的班级。\033[1;0m\n");
             continue;
         }
@@ -201,7 +233,16 @@ void inputScore(int *score)
     do
     {
         printf("\033[1;33m请输入成绩：\033[1;0m");
-        if (fgets(buffer, sizeof(buffer), stdin) == NULL || sscanf(buffer, "%d", score) != 1 || !validateScore(*score))
+        if (fgets(buffer, sizeof(buffer), stdin) == NULL)
+        {
+            if (feof(stdin))
+            {
+                printf("\n\033[1;31m检测到 EOF，程序退出!\033[1;0m\n");
+                exit(1);
+            }
+            fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的成绩。\033[1;0m\n");
+        }
+        else if (sscanf(buffer, "%d", score) != 1 || !validateScore(*score))
         {
             fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的成绩。\033[1;0m\n");
         }
@@ -218,7 +259,16 @@ void inputCredit(float *credit)
     do
     {
         printf("\033[1;33m请输入学分：\033[1;0m");
-        if (fgets(buffer, sizeof(buffer), stdin) == NULL || sscanf(buffer, "%f", credit) != 1 || !validateCredit(*credit))
+        if (fgets(buffer, sizeof(buffer), stdin) == NULL)
+        {
+            if (feof(stdin))
+            {
+                printf("\n\033[1;31m检测到 EOF，程序退出!\033[1;0m\n");
+                exit(1);
+            }
+            fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的学分。\033[1;0m\n");
+        }
+        else if (sscanf(buffer, "%f", credit) != 1 || !validateCredit(*credit))
         {
             fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的学分。\033[1;0m\n");
         }

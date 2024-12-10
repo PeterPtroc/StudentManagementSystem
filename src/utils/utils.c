@@ -59,4 +59,9 @@ void clean_stdin(void)
     {
         c = getchar();
     } while (c != '\n' && c != EOF);
+    if(c == EOF)
+    {
+        printf("\n\033[1;31m检测到 EOF，程序退出!\033[1;0m\n");
+        exit(1);
+    }
 }
