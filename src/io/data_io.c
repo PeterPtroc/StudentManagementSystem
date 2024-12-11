@@ -12,7 +12,7 @@
 #endif
 #include "data_io.h"
 
-#define INITIAL_CAPACITY 100
+#define INITIAL_CAPACITY 10
 
 void importData_while_start(Student **students, int *count, const char *filename)
 {
@@ -24,7 +24,7 @@ void importData_while_start(Student **students, int *count, const char *filename
 #endif
 }
 
-//零信任读取文件
+// 零信任读取文件
 void importData(Student **students, int *count, const char *filename)
 {
     FILE *file = fopen(filename, "r");
@@ -34,14 +34,14 @@ void importData(Student **students, int *count, const char *filename)
         return;
     }
 
-    int capacity = INITIAL_CAPACITY;
-    *students = (Student *)malloc(capacity * sizeof(Student));
-    if (*students == NULL)
+    // 处理旧数据逻辑
+    if (*students != NULL)
     {
-        perror("\033[1;31m内存分配失败\033[1;0m");
-        fclose(file);
-        return;
+        free(*students);
+        *students = NULL;
     }
+
+    int capacity = INITIAL_CAPACITY;
 
     *count = 0;
     int lineNum = 0;
@@ -99,7 +99,7 @@ void importData(Student **students, int *count, const char *filename)
         {
             int score;
             float credit;
-            
+
             if (sscanf(ptr, " %d %f", &score, &credit) != 2)
             {
                 printf("\033[1;33m警告: 第%d行课程%d数据格式无效，已跳过\033[1;0m\n", lineNum, i + 1);
@@ -135,9 +135,20 @@ void importData(Student **students, int *count, const char *filename)
             }
         }
 
-        // 如果所有数据都有效，保存这条记录
         if (validRecord)
         {
+            // 如果 *students 为 NULL，分配初始内存
+            if (*students == NULL)
+            {
+                *students = (Student *)malloc(capacity * sizeof(Student));
+                if (*students == NULL)
+                {
+                    perror("\033[1;31m内存分配失败\033[1;0m");
+                    fclose(file);
+                    return;
+                }
+            }
+
             (*students)[*count] = tempStudent;
             (*count)++;
 

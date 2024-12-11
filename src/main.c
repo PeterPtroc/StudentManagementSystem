@@ -33,7 +33,7 @@ void waitForKeyPress()
 
 void sub_menu_course_total(Student students[], int count);
 void sub_menu_course_class(Student students[], int count);
-void sub_menu_data_io(Student students[], int count);
+void sub_menu_data_io(Student **students, int *count);
 
 int main()
 {
@@ -127,7 +127,7 @@ int main()
         }
         case '9':
         {
-            sub_menu_data_io(students, count);
+            sub_menu_data_io(&students, &count);
             break;
         }
         case '0':
@@ -145,7 +145,11 @@ int main()
     } while (choice != '0');
 
     // 释放动态分配的内存
-    free(students);
+    if (students != NULL)
+    {
+        free(students);
+        students = NULL;
+    }
 
     return 0;
 }
@@ -248,7 +252,7 @@ void sub_menu_course_class(Student students[], int count)
     return;
 }
 
-void sub_menu_data_io(Student *students, int count)
+void sub_menu_data_io(Student **students, int *count)
 {
     char choice;
     do
@@ -268,13 +272,13 @@ void sub_menu_data_io(Student *students, int count)
         {
         case '1':
         {
-            importData(&students, &count, "data/export.ini");
+            importData(students, count, "data/export.ini");
             waitForKeyPress();
             break;
         }
         case '2':
         {
-            exportData(students, count, "data/export.ini");
+            exportData(*students, *count, "data/export.ini");
             waitForKeyPress();
             break;
         }

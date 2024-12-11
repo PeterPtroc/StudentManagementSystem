@@ -21,7 +21,8 @@ mkdir build
 
 cd build
 
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
+(使用cmake -DCMAKE_BUILD_TYPE=Debug .. 来调试)
 
 make
 
@@ -35,8 +36,7 @@ mkdir build
 
 cd build
 
-cmake -DUSE_MINGW=ON -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ -DCMAKE_RC_COMPILER=x86_64-w64-mingw32-windres ..
-
+cmake -DUSE_MINGW=ON -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ -DCMAKE_RC_COMPILER=x86_64-w64-mingw32-windres -DCMAKE_BUILD_TYPE=Release ..
 make
 
 ./StudentManagementSystem.exe
