@@ -13,7 +13,7 @@ void findClassHighestScore(Student students[], int count)
     int maxScore = -1;
     for (int i = 0; i < count; i++)
     {
-        if (strcmp(students[i].class, className) == 0)
+        if (strcmp(students[i].class_name, className) == 0)
         {
             if (students[i].score[courseNumber - 1] > maxScore)
             {
@@ -29,7 +29,7 @@ void findClassHighestScore(Student students[], int count)
     printf("\033[1;36m班级%s，课程[%s]的最高分是%d，学生有：\033[1;0m\n", className, courseNames[(courseNumber - 1) * 3], maxScore);
     for (int i = 0; i < count; i++)
     {
-        if (strcmp(students[i].class, className) == 0)
+        if (strcmp(students[i].class_name, className) == 0)
         {
             if (students[i].score[courseNumber - 1] == maxScore)
             {

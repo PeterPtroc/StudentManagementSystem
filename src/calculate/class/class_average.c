@@ -14,7 +14,7 @@ void calculateClassAverageScore(Student students[], int count)
     int classCount = 0;
     for (int i = 0; i < count; i++)
     {
-        if (strcmp(students[i].class, className) == 0)
+        if (strcmp(students[i].class_name, className) == 0)
         {
             totalScore += students[i].score[courseNumber - 1];
             classCount++;

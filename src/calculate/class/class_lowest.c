@@ -13,7 +13,7 @@ void findClassLowestScore(Student students[], int count)
     int minScore = 101;
     for (int i = 0; i < count; i++)
     {
-        if (strcmp(students[i].class, className) == 0)
+        if (strcmp(students[i].class_name, className) == 0)
         {
             if (students[i].score[courseNumber - 1] < minScore)
             {
@@ -29,7 +29,7 @@ void findClassLowestScore(Student students[], int count)
     printf("\033[1;36m班级%s，课程[%s]的最低分是%d，学生有：\033[1;0m\n", className, courseNames[(courseNumber - 1) * 3], minScore);
     for (int i = 0; i < count; i++)
     {
-        if (strcmp(students[i].class, className) == 0)
+        if (strcmp(students[i].class_name, className) == 0)
         {
             if (students[i].score[courseNumber - 1] == minScore)
             {

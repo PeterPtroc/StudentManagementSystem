@@ -27,25 +27,25 @@ int validateName(const char *name)
 }
 
 // 为了windows的兼容性放弃使用regex.h库，改为直接逻辑实现
-int validateClass(const char *class)
+int validateClass(const char *class_name)
 {
     // 检查长度是否为4
-    if (strlen(class) != 4)
+    if (strlen(class_name) != 4)
         return 0;
 
     // 检查前3位是否为"240"或"241"
-    if (strncmp(class, "240", 3) == 0)
+    if (strncmp(class_name, "240", 3) == 0)
     {
-        char c = class[3];
+        char c = class_name[3];
         // 第4位是否在'1'到'9'之间
         if (c >= '1' && c <= '9')
             return 1;
         else
             return 0;
     }
-    else if (strncmp(class, "241", 3) == 0)
+    else if (strncmp(class_name, "241", 3) == 0)
     {
-        char c = class[3];
+        char c = class_name[3];
         // 第4位是否在'0'到'5'之间
         if (c >= '0' && c <= '5')
             return 1;
@@ -195,12 +195,12 @@ void inputName(char *name, size_t size)
     } while (1);
 }
 
-void inputClass(char *class, size_t size)
+void inputClass(char *class_name, size_t size)
 {
     do
     {
         printf("\033[1;33m请输入班级：\033[1;0m");
-        if (fgets(class, size, stdin) == NULL)
+        if (fgets(class_name, size, stdin) == NULL)
         {
             if (feof(stdin))
             {
@@ -212,11 +212,11 @@ void inputClass(char *class, size_t size)
         }
         // 移除额外读入的换行符
 #ifdef _WIN32
-        class[strcspn(class, "\r\n")] = '\0';
+        class_name[strcspn(class_name, "\r\n")] = '\0';
 #else
-        class[strcspn(class, "\n")] = '\0';
+        class_name[strcspn(class_name, "\n")] = '\0';
 #endif
-        if (!validateClass(class))
+        if (!validateClass(class_name))
         {
             fprintf(stderr, "\033[1;31m输入错误，请输入一个有效的班级。\033[1;0m\n");
         }
@@ -283,7 +283,7 @@ void inputStudent(Student *stu)
 {
     inputStudentNumber(&stu->num);
     inputName(stu->name, sizeof(stu->name));
-    inputClass(stu->class, sizeof(stu->class));
+    inputClass(stu->class_name, sizeof(stu->class_name));
 
     for (int i = 0; i < COURSE_NUM; i++)
     {

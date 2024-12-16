@@ -55,7 +55,7 @@ void importData(Student **students, int *count, const char *filename)
         int validRecord = 1;
 
         // 尝试解析，临时存储
-        if (sscanf(line, "%d %s %s", &tempStudent.num, tempStudent.name, tempStudent.class) != 3)
+        if (sscanf(line, "%d %s %s", &tempStudent.num, tempStudent.name, tempStudent.class_name) != 3)
         {
             printf("\033[1;33m警告: 第%d行基本信息格式不正确，已跳过\033[1;0m\n", lineNum);
             continue;
@@ -76,9 +76,9 @@ void importData(Student **students, int *count, const char *filename)
         }
 
         // 验证班级
-        if (!validateClass(tempStudent.class))
+        if (!validateClass(tempStudent.class_name))
         {
-            printf("\033[1;33m警告: 第%d行班级 %s 无效，已跳过\033[1;0m\n", lineNum, tempStudent.class);
+            printf("\033[1;33m警告: 第%d行班级 %s 无效，已跳过\033[1;0m\n", lineNum, tempStudent.class_name);
             continue;
         }
 
@@ -206,7 +206,7 @@ void exportData(Student *students, int count, const char *filename)
 
     for (int i = 0; i < count; i++)
     {
-        fprintf(file, "%d %s %s", students[i].num, students[i].name, students[i].class);
+        fprintf(file, "%d %s %s", students[i].num, students[i].name, students[i].class_name);
         for (int j = 0; j < COURSE_NUM; j++)
         {
             fprintf(file, " %d %f", students[i].score[j], students[i].credit[j]);
