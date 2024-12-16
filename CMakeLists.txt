@@ -53,3 +53,23 @@ target_link_options(StudentManagementSystem PRIVATE
 if(USE_MINGW)
     target_sources(StudentManagementSystem PRIVATE ${RESOURCE_FILES})
 endif()
+
+
+# --------------------------
+# Google Test Setup
+# --------------------------
+
+# 通过 FetchContent 下载 Google Test
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        release-1.11.0  # 或者使用最新的稳定版本
+)
+FetchContent_MakeAvailable(googletest)
+
+# 设置测试目录
+enable_testing()
+
+# 创建测试文件夹
+add_subdirectory(test)
